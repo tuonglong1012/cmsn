@@ -1,11 +1,12 @@
 body {
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            overflow: hidden;
-            height: 100vh;
-        }
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    overflow-x: hidden; /* chỉ ẩn cuộn ngang */
+    min-height: 100vh;  /* dùng min-height thay vì height cố định */
+}
+
 
         .background-layer {
             position: fixed;
@@ -146,6 +147,7 @@ body {
         }
 
         .navigation {
+            height: 70px;
             display: flex;
             flex-direction: row;
             position: fixed;
@@ -230,14 +232,16 @@ body {
         }
 
         /* Trang Gallery */
-        .gallery-page {
-            display: none;
-            padding: 50px 20px;
-            text-align: center;
-            min-height: 100vh;
-        }
+       .gallery-page, .wishes-page {
+    display: none;
+    padding: 50px 20px;
+    text-align: center;
+    min-height: 100vh;
+    overflow-y: auto; /* Cho phép cuộn khi nội dung vượt quá */
+}
 
         .gallery-title {
+            
             font-size: 3em;
             color: white;
             margin-bottom: 40px;
@@ -293,14 +297,13 @@ body {
             min-height: 100vh;
         }
 
-        .wishes-container {
-  max-width: 800px;
-  margin: 0 auto;
-  height: calc(100vh - 160px); /* Tùy thuộc phần header của bạn */
-  overflow-y: auto;
-  padding-bottom: 100px; /* Chừa không gian tránh bị navigation che */
-  box-sizing: border-box;
+.wishes-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding-bottom: 100px;
+    box-sizing: border-box;
 }
+
 
 
 
@@ -420,15 +423,18 @@ body {
                 padding: 0 20px;
             }
             
-            .navigation {
-                flex-wrap: wrap;
-                bottom: 20px;
-            }
-            
-            .nav-btn {
-                padding: 10px 15px;
-                font-size: 0.9em;
-            }
+           .navigation {
+        flex-direction: row;
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding: 10px;
+        bottom: 10px;
+    }
+
+    .nav-btn {
+        font-size: 0.9em;
+        padding: 10px 15px;
+    }
         }
 
         .hidden {

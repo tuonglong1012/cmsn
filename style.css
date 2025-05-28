@@ -146,6 +146,8 @@ body {
         }
 
         .navigation {
+            display: flex;
+            flex-direction: row;
             position: fixed;
             bottom: 30px;
             left: 50%;

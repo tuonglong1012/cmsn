@@ -1,147 +1,426 @@
 body {
-  margin: 0;
-  padding: 0;
-  background: linear-gradient(to right, #ffecd2, #fcb69f);
-  font-family: 'Comic Sans MS', cursive, sans-serif;
-  overflow: hidden;
-}
-.background-layer {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to right, #ffecd2, #fcb69f);
-  z-index: 0;
-}
-html, body {
-  height: 100%;
-}
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            overflow: hidden;
+            height: 100vh;
+        }
 
-.container {
-  text-align: center;
-  padding-top: 10vh;
-  color: #fff;
-  position: relative;
-  background-color: rgb(224,255,255);
-  z-index: 2; /* ✅ Đảm bảo hiển thị trên canvas */
-    min-height: 100vh;
+        .background-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            z-index: 0;
+        }
 
-}
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
 
-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  z-index: 1; /* ✅ Đặt phía sau nội dung */
-}
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite;
+        }
 
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
 
-h1 {
-  font-size: 3em;
-  animation: glow 1.5s ease-in-out infinite alternate;
-}
+        .container {
+            text-align: center;
+            padding-top: 10vh;
+            color: #fff;
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            display: none;
+        }
 
-@keyframes glow {
-  from {
-    text-shadow: 0 0 10px #fff, 0 0 20px #f09, 0 0 30px #f09;
-  }
-  to {
-    text-shadow: 0 0 20px #ff0, 0 0 30px #f0f, 0 0 40px #f0f;
-  }
-}
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            z-index: 3;
+            position: relative;
+        }
 
-p {
-  font-size: 1.5em;
-  margin-top: 20px;
-  color: #f4bbff
-}
+        .welcome-title {
+            font-size: 4em;
+            color: #fff;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
+            animation: glow 2s ease-in-out infinite alternate;
+            margin-bottom: 30px;
+        }
 
-img {
-  width: 200px;
-  border-radius: 50%;
-  margin-top: 30px;
-  box-shadow: 0 0 20px #fff;
-}
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 20px #fff, 0 0 30px #ff69b4, 0 0 40px #ff69b4;
+            }
+            to {
+                text-shadow: 0 0 30px #fff, 0 0 40px #ff1493, 0 0 50px #ff1493;
+            }
+        }
 
+        .start-btn {
+            padding: 20px 40px;
+            font-size: 1.5em;
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.4);
+            animation: pulse 2s infinite;
+            transition: all 0.3s ease;
+        }
 
-audio {
-  display: none;
-}
-#showBtn {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 1em 2em;
-  font-size: 1.2em;
-  background: #ff69b4;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  z-index: 3;
-  box-shadow: 0 0 20px #fff;
-  animation: pulse 1.5s infinite;
-}
+        .start-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(255, 105, 180, 0.6);
+        }
 
-@keyframes pulse {
-  0% { transform: translate(-50%, -50%) scale(1); }
-  50% { transform: translate(-50%, -50%) scale(1.1); }
-  100% { transform: translate(-50%, -50%) scale(1); }
-}
-.balloons {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 1;
-}
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
 
-.balloon {
-  position: absolute;
-  bottom: -100px;
-  width: 40px;
-  height: 60px;
-  border-radius: 50% 50% 50% 50%;
-  background-color: red;
-  animation: float 8s linear infinite;
-  opacity: 0.8;
-}
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
 
-@keyframes float {
-  0% {
-    transform: translateY(0);
-    opacity: 0.8;
-  }
-  100% {
-    transform: translateY(-110vh);
-    opacity: 0;
-  }
-}
-.birthday-note {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: rgba(255, 255, 204, 0.95);
-  color: #444;
-  padding: 15px 20px;
-  border-radius: 12px;
-  font-size: 1em;
-  font-weight: bold;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  z-index: 5;
-  max-width: 300px;
-  animation: floatNote 4s ease-in-out infinite;
-  font-family: 'Comic Sans MS', cursive;
-}
+        h1 {
+            font-size: 3.5em;
+            animation: bounce 2s ease-in-out infinite;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        }
 
-@keyframes floatNote {
-  0%   { transform: translateY(0px); }
-  50%  { transform: translateY(-5px); }
-  100% { transform: translateY(0px); }
-}
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+
+        .profile-img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            margin: 30px auto;
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.6);
+            animation: rotate360 20s linear infinite;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes rotate360 {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .birthday-message {
+            font-size: 1.8em;
+            margin: 30px 0;
+            color: #ffff99;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 5;
+        }
+
+        .nav-btn {
+            padding: 15px 25px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            font-size: 1em;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .balloons {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .balloon {
+            position: absolute;
+            bottom: -100px;
+            width: 50px;
+            height: 70px;
+            border-radius: 50% 50% 50% 50%;
+            animation: float 10s linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-120vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .birthday-note {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 192, 203, 0.9));
+            color: #444;
+            padding: 20px;
+            border-radius: 15px;
+            font-size: 1.1em;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            z-index: 5;
+            max-width: 350px;
+            animation: floatNote 3s ease-in-out infinite;
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes floatNote {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Trang Gallery */
+        .gallery-page {
+            display: none;
+            padding: 50px 20px;
+            text-align: center;
+            min-height: 100vh;
+        }
+
+        .gallery-title {
+            font-size: 3em;
+            color: white;
+            margin-bottom: 40px;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .photo-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .photo-item:hover {
+            transform: scale(1.05);
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        /* Trang Wishes */
+        .wishes-page {
+            display: none;
+            padding: 50px 20px;
+            text-align: center;
+            min-height: 100vh;
+        }
+
+        .wishes-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .wish-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .wish-text {
+            font-size: 1.3em;
+            color: white;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .wish-author {
+            font-size: 1.1em;
+            color: #ffff99;
+            font-style: italic;
+        }
+
+        /* Trang Game */
+        .game-page {
+            display: none;
+            padding: 50px 20px;
+            text-align: center;
+            min-height: 100vh;
+        }
+
+        .game-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .game-title {
+            font-size: 2.5em;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .cake-game {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .cake {
+            font-size: 5em;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .cake:hover {
+            transform: scale(1.2);
+        }
+
+        .candles {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .candle {
+            font-size: 2em;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .candle.blown {
+            opacity: 0.3;
+            transform: scale(0.8);
+        }
+
+        .game-message {
+            font-size: 1.5em;
+            color: #ffff99;
+            margin-top: 20px;
+            min-height: 50px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2.5em;
+            }
+            
+            h1 {
+                font-size: 2.5em;
+            }
+            
+            .profile-img {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .birthday-message {
+                font-size: 1.4em;
+                padding: 0 20px;
+            }
+            
+            .navigation {
+                flex-wrap: wrap;
+                bottom: 20px;
+            }
+            
+            .nav-btn {
+                padding: 10px 15px;
+                font-size: 0.9em;
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .page {
+            position: relative;
+            z-index: 2;
+        }

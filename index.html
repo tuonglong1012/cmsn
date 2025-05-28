@@ -1,37 +1,116 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Chúc mừng sinh nhật!</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc mừng sinh nhật!</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <canvas id="fireworks"></canvas>
-<div class="background-layer"></div>
-   <div class="container" id="content" style="display: none;">
-    <h1>🎉 Chúc mừng sinh nhật! 🎂</h1>
-    <p>Chúc mừng tuổi 20, <strong>Lê Nguyễn Mai Phương</strong>!</p>
-    <img src="lnmp.jpg" alt="Happy Birthday">
-    <audio autoplay loop>
-      <source src="https://cdn.pixabay.com/download/audio/2023/03/14/audio_6097b6e5bb.mp3?filename=happy-birthday-to-you-141746.mp3" type="audio/mpeg">
+    <canvas id="fireworks"></canvas>
+    <div class="background-layer"></div>
+    <div class="stars" id="stars"></div>
+
+    <!-- Trang chào mừng -->
+    <div class="welcome-page" id="welcomePage">
+        <h1 class="welcome-title">🎉 Happy Birthday! 🎂</h1>
+        <button class="start-btn" onclick="startCelebration()">Bắt đầu lễ kỷ niệm! ✨</button>
+    </div>
+
+    <!-- Trang chính -->
+    <div class="container page" id="mainPage">
+        <h1>🎉 Chúc mừng sinh nhật! 🎂</h1>
+        <p class="birthday-message">Chúc mừng tuổi 20, <strong>Lê Nguyễn Mai Phương</strong>!</p>
+        <div class="profile-img" style="background: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><circle cx=%22100%22 cy=%22100%22 r=%2280%22 fill=%22%23ff69b4%22/><text x=%22100%22 y=%22110%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2230%22>👑</text></svg>') center/cover;"></div>
+        
+        <div class="balloons" id="balloons"></div>
+        
+        <div class="birthday-note">
+            💌 Chúc Phương tuổi mới luôn vui vẻ, hạnh phúc và đạt được mọi điều mong muốn. 
+            Tuổi mới tràn đầy niềm vui, sức khỏe, không than béo vì béo Pon mới yêu. Anh yêu em. ❤️
+        </div>
+    </div>
+
+    <!-- Trang Gallery -->
+    <div class="gallery-page page" id="galleryPage">
+        <h2 class="gallery-title">📸 Kỷ niệm đẹp</h2>
+        <div class="photo-grid">
+            <div class="photo-item">
+                <div class="photo-placeholder">🎂 Bánh sinh nhật</div>
+                <p style="color: white;">Chiếc bánh sinh nhật đặc biệt</p>
+            </div>
+            <div class="photo-item">
+                <div class="photo-placeholder">🎈 Tiệc sinh nhật</div>
+                <p style="color: white;">Khoảnh khắc vui vẻ</p>
+            </div>
+            <div class="photo-item">
+                <div class="photo-placeholder">🎁 Quà tặng</div>
+                <p style="color: white;">Những món quà ý nghĩa</p>
+            </div>
+            <div class="photo-item">
+                <div class="photo-placeholder">👫 Bạn bè</div>
+                <p style="color: white;">Cùng bạn bè thân yêu</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trang Lời chúc -->
+    <div class="wishes-page page" id="wishesPage">
+        <h2 class="gallery-title">💝 Lời chúc từ trái tim</h2>
+        <div class="wishes-container">
+            <div class="wish-card">
+                <div class="wish-text">
+                    "Chúc em một tuổi mới tràn đầy hạnh phúc, sức khỏe dồi dào và luôn rạng ngời với nụ cười tươi đẹp nhất!"
+                </div>
+                <div class="wish-author">- Từ người yêu thương em ❤️</div>
+            </div>
+            
+            <div class="wish-card">
+                <div class="wish-text">
+                    "20 tuổi là độ tuổi đẹp nhất, chúc Phương luôn giữ được sự trẻ trung, năng động và chinh phục mọi ước mơ!"
+                </div>
+                <div class="wish-author">- Gia đình yêu thương 👨‍👩‍👧‍👦</div>
+            </div>
+            
+            <div class="wish-card">
+                <div class="wish-text">
+                    "Mong rằng tuổi mới sẽ mang đến cho em thật nhiều điều tuyệt vời, thành công trong học tập và công việc!"
+                </div>
+                <div class="wish-author">- Bạn bè thân yêu 👭</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trang Game -->
+    <div class="game-page page" id="gamePage">
+        <h2 class="game-title">🎮 Mini Game: Thổi nến sinh nhật</h2>
+        <div class="game-container">
+            <div class="cake-game">
+                <div class="cake" onclick="blowCandles()">🎂</div>
+                <div class="candles" id="candles">
+                    <span class="candle" onclick="blowCandle(0)">🕯️</span>
+                    <span class="candle" onclick="blowCandle(1)">🕯️</span>
+                    <span class="candle" onclick="blowCandle(2)">🕯️</span>
+                    <span class="candle" onclick="blowCandle(3)">🕯️</span>
+                    <span class="candle" onclick="blowCandle(4)">🕯️</span>
+                </div>
+                <div class="game-message" id="gameMessage">Nhấp vào từng ngọn nến để thổi tắt! 💨</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="navigation" id="navigation" style="display: none;">
+        <button class="nav-btn" onclick="showPage('mainPage')">🏠 Trang chính</button>
+        <button class="nav-btn" onclick="showPage('galleryPage')">📸 Kỷ niệm</button>
+        <button class="nav-btn" onclick="showPage('wishesPage')">💝 Lời chúc</button>
+        <button class="nav-btn" onclick="showPage('gamePage')">🎮 Game</button>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2023/03/14/audio_6097b6e5bb.mp3?filename=happy-birthday-to-you-141746.mp3" type="audio/mpeg">
     </audio>
-    <div class="balloons" id="balloons"></div>
-    <div class="birthday-note">
-  💌 Chúc Phương tuổi mới luôn vui vẻ, hạnh phúc và đạt được mọi điều mong muốn. 
-  Tuổi mới tràn đầy niềm vui, sức khỏe, không than béo vì béo Pon mới yêu. Anh yêu em.
-</div>
 
-  </div>
-  <!-- Nút hiện lời chúc -->
-  <button id="showBtn" style="display: none;" onclick="showMessage()">Xem lời chúc 🎁</button>
-
-  <!-- Lời chúc -->
- 
-  
-
-
-  <script src="script.js"></script>
+<script src="/script.js"></script>
 </body>
-
 </html>

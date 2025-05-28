@@ -263,18 +263,25 @@ body {
             transform: scale(1.05);
         }
 
-        .photo-placeholder {
-            width: 100%;
-            height: 150px;
-            background: linear-gradient(45deg, #ff69b4, #ff1493);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2em;
-            margin-bottom: 10px;
-        }
+
+      .photo-placeholder {
+        width: 100%;
+        height: 150px;
+        background: linear-gradient(45deg, #ff69b4, #ff1493);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden; /* Quan trọng: tránh ảnh tràn khỏi khung */
+        margin-bottom: 10px;
+      }
+
+      .photo-placeholder img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Giúp ảnh bao trọn khung, không méo */
+        border-radius: 10px; /* Giúp ảnh bo tròn theo khung cha */
+      }
 
         /* Trang Wishes */
         .wishes-page {
@@ -285,9 +292,15 @@ body {
         }
 
         .wishes-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
+  max-width: 800px;
+  margin: 0 auto;
+  height: calc(100vh - 160px); /* Tùy thuộc phần header của bạn */
+  overflow-y: auto;
+  padding-bottom: 100px; /* Chừa không gian tránh bị navigation che */
+  box-sizing: border-box;
+}
+
+
 
         .wish-card {
             background: rgba(255, 255, 255, 0.1);
